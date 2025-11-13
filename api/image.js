@@ -1,3 +1,7 @@
+export const config = {
+  runtime: "nodejs18.x",
+};
+
 import satori from "satori";
 import sharp from "sharp";
 import fs from "fs";
