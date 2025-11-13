@@ -1,9 +1,9 @@
-import satori from "satori";
-import sharp from "sharp";
-
 export const config = {
   runtime: "nodejs",
 };
+
+import satori from "satori";
+import sharp from "sharp";
 
 export default async function handler(req, res) {
   try {
