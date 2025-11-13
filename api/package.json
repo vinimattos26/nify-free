@@ -1,0 +1,9 @@
+{
+  "name": "nify-free",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@vercel/og": "latest"
+  }
+}
