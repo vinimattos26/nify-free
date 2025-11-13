@@ -2,8 +2,9 @@
   "name": "nify-free",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "dependencies": {
-    "sharp": "latest",
-    "satori": "latest"
+    "satori": "latest",
+    "sharp": "latest"
   }
 }
