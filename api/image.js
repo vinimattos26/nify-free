@@ -1,22 +1,17 @@
 export const config = {
   runtime: "nodejs18.x",
 };
-
 import satori from "satori";
 import sharp from "sharp";
-import fs from "fs";
-import path from "path";
 
 export const config = {
-  runtime: "nodejs",
+  runtime: "nodejs18.x",
 };
 
 export default async function handler(req, res) {
   try {
-    const { searchParams } = new URL(req.url, `http://${req.headers.host}`);
-    const name = searchParams.get("name") || "Amiga";
-
-    const backgroundUrl = "https://i.imgur.com/3OZN2d8.png";
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const name = url.searchParams.get("name") || "Amiga";
 
     const svg = await satori(
       {
@@ -25,14 +20,14 @@ export default async function handler(req, res) {
           style: {
             width: "800px",
             height: "600px",
-            backgroundImage: `url(${backgroundUrl})`,
+            backgroundImage: `url(https://i.imgur.com/3OZN2d8.png)`,
             backgroundSize: "cover",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "64px",
+            fontSize: "72px",
             fontWeight: "bold",
-            color: "black",
+            color: "#000",
             textShadow: "2px 2px 10px rgba(255,255,255,0.9)",
           },
           children: name,
@@ -41,3 +36,15 @@ export default async function handler(req, res) {
       {
         width: 800,
         height: 600,
+      }
+    );
+
+    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    res.setHeader("Content-Type", "image/png");
+    res.send(pngBuffer);
+  } catch (error) {
+    console.error("Erro ao gerar imagem:", error);
+    res.status(500).send("Erro interno ao gerar imagem");
+  }
+}
